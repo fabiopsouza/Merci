@@ -1,16 +1,22 @@
 package br.com.merci.web;
 
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import br.com.merci.api.MerciApiConfiguration;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration;
+import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 
 @SpringBootApplication
+@EnableAutoConfiguration(exclude = { 
+		DataSourceAutoConfiguration.class, 
+		DataSourceTransactionManagerAutoConfiguration.class, 
+		HibernateJpaAutoConfiguration.class 
+})
 public class MerciWebConfiguration {
 
 	public static void main(String[] args) {
-		Object[] sources = {MerciWebConfiguration.class, MerciApiConfiguration.class};
-		SpringApplication.run(sources, args);
+		SpringApplication.run(MerciWebConfiguration.class);
 	}
 
 }

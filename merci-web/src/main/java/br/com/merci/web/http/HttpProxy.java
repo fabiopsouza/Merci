@@ -1,12 +1,14 @@
-package br.com.merci.web.controller;
+package br.com.merci.web.http;
 
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import br.com.merci.domain.http.HttpResponse;
 
-public class ParentController {
+@Component
+public class HttpProxy {
 
-	private final String api = "http://localhost:8080/api/";
+	private final String api = "http://localhost:8081/api/";
 	
 	public Object getObject(String uri){
 		RestTemplate restTemplate = new RestTemplate();

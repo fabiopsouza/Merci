@@ -22,7 +22,7 @@ public class FornecedorRest {
 		try {
 			return new HttpResponse(service.findAll());
 		} catch (Exception e) {
-			return new HttpResponse(e);
+			return new HttpResponse(e.getMessage());
 		}
 	}
 
@@ -31,7 +31,7 @@ public class FornecedorRest {
 		try {
 			return new HttpResponse(service.findOne(id));
 		} catch (Exception e) {
-			return new HttpResponse(e);
+			return new HttpResponse(e.getMessage());
 		}
 	}
 
@@ -40,7 +40,7 @@ public class FornecedorRest {
 		try {
 			service.save(fornecedor);
 		} catch (Exception e) {
-			return new HttpResponse(e);
+			return new HttpResponse(e.getMessage());
 		}
 
 		return new HttpResponse(true);
@@ -51,7 +51,7 @@ public class FornecedorRest {
 		try {
 			service.delete(id);
 		} catch (Exception e) {
-			return new HttpResponse(e);
+			return new HttpResponse(e.getMessage());
 		}
 
 		return new HttpResponse(true);

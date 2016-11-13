@@ -4,7 +4,7 @@
 		<div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Merci!</span></a>
+              <a href="/" class="site_title"><i class="fa fa-truck"></i> <span>Merci!</span></a>
             </div>
             <div class="clearfix"></div>
             <div th:replace="fragments/sidebar :: profile"></div>
@@ -18,11 +18,11 @@
 	<div th:fragment="profile">
 		<div class="profile">
            <div class="profile_pic">
-             <img src="images/img.jpg" alt="..." class="img-circle profile_img" />
+             <img src="/images/img.jpg" alt="..." class="img-circle profile_img" />
            </div>
            <div class="profile_info">
-             <span>Welcome,</span>
-             <h2>John Doe</h2>
+             <span>Bem Vindo,</span>
+             <h2>Fábio</h2>
            </div>
          </div>
 	</div>
@@ -34,7 +34,8 @@
 	        <ul class="nav side-menu">
 	          <li><a><i class="fa fa-home"></i> Fornecedor <span class="fa fa-chevron-down"></span></a>
 	            <ul class="nav child_menu">
-	              <li><a href="index.html">Cadastrar</a></li>
+	              <li><a href="/fornecedor">Lista</a></li>
+	              <li><a href="/fornecedor/add">Cadastrar</a></li>
 	            </ul>
 	          </li>
 	        </ul>

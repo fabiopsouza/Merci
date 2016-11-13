@@ -1,8 +1,35 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-    <div th:replace="fragments/main :: top(title='Merci', subtitle='Bem Vindo!')"></div>
-	
-	
-	
-	<div th:replace="fragments/main :: bottom"></div>              
+
+<head th:replace="fragments/head :: head(title='Home')"></head>    
+<body class="nav-md">
+ <div class="container body">
+   <div class="main_container">
+   	 <div th:replace="fragments/sidebar :: content"></div>	
+     <div th:replace="fragments/top :: navigation"></div>
+
+     <!-- page content -->
+     <div class="right_col" role="main">
+     	<div class="">
+     		<div class="page-title">
+              <div class="title_left">
+                <h3>Home <small>Seja bem vindo!</small></h3>
+              </div>
+            </div>
+     	</div>
+     	
+     	<!-- CONTENT HERE -->	
+     	
+     </div>
+     
+     
+     <!-- /page content -->
+
+ 	<div th:replace="fragments/footer :: content"></div>    
+   </div>
+ </div>
+
+    
+    <div th:replace="fragments/scripts :: import"></div>
+</body>              
 </html>

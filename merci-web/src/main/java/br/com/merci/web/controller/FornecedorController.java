@@ -27,5 +27,10 @@ public class FornecedorController {
 		
 		return "pages/fornecedor/fornecedor-list";
 	}
+	
+	@RequestMapping(path = "/add", method = RequestMethod.GET)
+	public String add(Model model) {
+		return "pages/fornecedor/fornecedor-add";
+	}
 
 }

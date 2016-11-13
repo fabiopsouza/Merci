@@ -12,6 +12,8 @@ public class HttpResponse implements Serializable {
 	public boolean isSuccess;
 	public Object data;
 	public String error;
+	public String errorDetail;
+	public String field;
 	public Integer code;
 
 	public HttpResponse() {
@@ -30,6 +32,12 @@ public class HttpResponse implements Serializable {
 	public HttpResponse(String error) {
 		this.isSuccess = false;
 		this.error = error;
+	}
+	
+	public HttpResponse(String error, String errorDetail) {
+		this.isSuccess = false;
+		this.error = error;
+		this.errorDetail = errorDetail;
 	}
 
 	public HttpResponse(boolean isSuccess, Object data, String error, Integer code) {
@@ -63,6 +71,22 @@ public class HttpResponse implements Serializable {
 		this.error = error;
 	}
 
+	public String getErrorDetail() {
+		return errorDetail;
+	}
+
+	public void setErrorDetail(String errorDetail) {
+		this.errorDetail = errorDetail;
+	}
+
+	public String getField() {
+		return field;
+	}
+
+	public void setField(String field) {
+		this.field = field;
+	}
+
 	public Integer getCode() {
 		return code;
 	}
@@ -72,18 +96,14 @@ public class HttpResponse implements Serializable {
 	}
 
 	@Override
-	public String toString() {
-		return "HttpResponse [isSuccess=" + isSuccess + ", data=" + (data != null ? data.toString() : null) + ", error="
-				+ error + ", code=" + code + "]";
-	}
-
-	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((code == null) ? 0 : code.hashCode());
 		result = prime * result + ((data == null) ? 0 : data.hashCode());
 		result = prime * result + ((error == null) ? 0 : error.hashCode());
+		result = prime * result + ((errorDetail == null) ? 0 : errorDetail.hashCode());
+		result = prime * result + ((field == null) ? 0 : field.hashCode());
 		result = prime * result + (isSuccess ? 1231 : 1237);
 		return result;
 	}
@@ -112,9 +132,25 @@ public class HttpResponse implements Serializable {
 				return false;
 		} else if (!error.equals(other.error))
 			return false;
+		if (errorDetail == null) {
+			if (other.errorDetail != null)
+				return false;
+		} else if (!errorDetail.equals(other.errorDetail))
+			return false;
+		if (field == null) {
+			if (other.field != null)
+				return false;
+		} else if (!field.equals(other.field))
+			return false;
 		if (isSuccess != other.isSuccess)
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "HttpResponse [isSuccess=" + isSuccess + ", data=" + data + ", error=" + error + ", errorDetail="
+				+ errorDetail + ", field=" + field + ", code=" + code + "]";
 	}
 
 }

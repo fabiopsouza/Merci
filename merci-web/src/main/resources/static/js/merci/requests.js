@@ -1,0 +1,3 @@
+function doLogout(){
+	$("#hiddenLogoutForm").submit();
+}

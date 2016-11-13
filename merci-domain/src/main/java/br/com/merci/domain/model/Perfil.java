@@ -2,6 +2,7 @@ package br.com.merci.domain.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -43,6 +44,7 @@ public class Perfil implements Serializable {
 		this.id = id;
 	}
 
+	@Column(nullable = false, unique = true)
 	public String getNome() {
 		return nome;
 	}

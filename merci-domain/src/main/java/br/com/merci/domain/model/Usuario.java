@@ -3,7 +3,9 @@ package br.com.merci.domain.model;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -39,7 +41,7 @@ public class Usuario implements Serializable {
 		this.senha = usuario.senha;
 		this.ativo = usuario.ativo;
 	}
-	
+
 	public Usuario(String nome, String email, String senha, Boolean ativo) {
 		this.nome = nome;
 		this.email = email;
@@ -65,6 +67,7 @@ public class Usuario implements Serializable {
 		this.id = id;
 	}
 
+	@Column(nullable = false, unique = true)
 	public String getNome() {
 		return nome;
 	}
@@ -73,6 +76,7 @@ public class Usuario implements Serializable {
 		this.nome = nome;
 	}
 
+	@Column(nullable = false, unique = true)
 	public String getEmail() {
 		return email;
 	}
@@ -81,6 +85,7 @@ public class Usuario implements Serializable {
 		this.email = email;
 	}
 
+	@Column(nullable = false)
 	public String getSenha() {
 		return senha;
 	}
@@ -89,6 +94,7 @@ public class Usuario implements Serializable {
 		this.senha = senha;
 	}
 
+	@Column(nullable = false)
 	public Boolean getAtivo() {
 		return ativo;
 	}
@@ -97,7 +103,7 @@ public class Usuario implements Serializable {
 		this.ativo = ativo;
 	}
 
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "usuario_perfil", joinColumns = { @JoinColumn(name = "usuario_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "perfil_id") })
 	public List<Perfil> getPerfis() {

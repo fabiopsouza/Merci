@@ -44,7 +44,7 @@ public class Perfil implements Serializable {
 		this.id = id;
 	}
 
-	@Column(nullable = false, unique = true)
+	@Column(nullable = false, unique = true, length = 60)
 	public String getNome() {
 		return nome;
 	}

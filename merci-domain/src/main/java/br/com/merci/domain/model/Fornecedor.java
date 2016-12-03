@@ -12,10 +12,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -27,23 +29,28 @@ public class Fornecedor implements Serializable {
 
 	private Long id;
 	private String nome;
-	private String endereco;
 	private Documento documento;
+	private Long idEndereco;
+	private Endereco endereco;
 	private List<Contato> contatos;
 
 	public Fornecedor() {
 		// Default constructor
 	}
 
-	public Fornecedor(String nome, String endereco) {
+	public Fornecedor(String nome, Documento documento, Endereco endereco, List<Contato> contatos) {
 		this.nome = nome;
+		this.documento = documento;
 		this.endereco = endereco;
+		this.contatos = contatos;
 	}
-
-	public Fornecedor(Long id, String nome, String endereco) {
+	
+	public Fornecedor(Long id, String nome, Documento documento, Endereco endereco, List<Contato> contatos) {
 		this.id = id;
 		this.nome = nome;
+		this.documento = documento;
 		this.endereco = endereco;
+		this.contatos = contatos;
 	}
 
 	@Id
@@ -64,18 +71,29 @@ public class Fornecedor implements Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+	
+	@Column(nullable = false, insertable = false, updatable = false)
+	public Long getIdEndereco() {
+		return idEndereco;
+	}
 
-	@Column(nullable = false, length = 120)
-	public String getEndereco() {
+	public void setIdEndereco(Long idEndereco) {
+		this.idEndereco = idEndereco;
+	}
+	
+	@JsonBackReference
+    @JoinColumn(name = "idEndereco")
+	@ManyToOne(fetch=FetchType.LAZY)
+	public Endereco getEndereco() {
 		return endereco;
 	}
 
-	public void setEndereco(String endereco) {
+	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}
-
+	
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "documentoId", nullable = false)
+	@JoinColumn(name = "idDocumento", nullable = false)
 	public Documento getDocumento() {
 		return documento;
 	}
@@ -86,8 +104,8 @@ public class Fornecedor implements Serializable {
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinTable(name = "fornecedor_contato", joinColumns = {
-			@JoinColumn(name = "fornecedorId", referencedColumnName = "id") }, inverseJoinColumns = {
-					@JoinColumn(name = "contatoId", referencedColumnName = "id") })
+			@JoinColumn(name = "idFornecedor", referencedColumnName = "id") }, inverseJoinColumns = {
+					@JoinColumn(name = "idContato", referencedColumnName = "id") })
 	public List<Contato> getContatos() {
 		return contatos;
 	}
@@ -95,4 +113,5 @@ public class Fornecedor implements Serializable {
 	public void setContatos(List<Contato> contatos) {
 		this.contatos = contatos;
 	}
+
 }

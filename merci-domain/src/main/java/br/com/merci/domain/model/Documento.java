@@ -59,7 +59,7 @@ public class Documento implements Serializable {
 	}
 
 	@OneToOne
-    @JoinColumn(name="tipoDocumentoId", nullable = false)
+    @JoinColumn(name="idTipoDocumento", nullable = false)
 	public TipoDocumento getTipoDocumento() {
 		return tipoDocumento;
 	}

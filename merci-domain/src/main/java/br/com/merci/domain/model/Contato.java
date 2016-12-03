@@ -1,5 +1,7 @@
 package br.com.merci.domain.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,8 +16,10 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table(name = "contato")
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Contato {
+public class Contato implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	private Long id;
 	private String numero;
 	private TipoContato tipoContato;
@@ -55,7 +59,7 @@ public class Contato {
 	}
 
 	@OneToOne
-    @JoinColumn(name="tipoContatoId", nullable = false)
+    @JoinColumn(name="idTipoContato", nullable = false)
 	public TipoContato getTipoContato() {
 		return tipoContato;
 	}

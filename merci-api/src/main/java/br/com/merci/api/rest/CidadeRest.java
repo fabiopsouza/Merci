@@ -1,9 +1,11 @@
 package br.com.merci.api.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.merci.core.service.CidadeService;
@@ -26,6 +28,15 @@ public class CidadeRest {
 		}
 	}
 
+	@RequestMapping(path = "/{page}/{size}", method = RequestMethod.POST)
+	public HttpResponse findAllPageable(@PathVariable Integer page, @PathVariable Integer size, @RequestParam("nome") String nome) {
+		try {
+			return new HttpResponse(service.findByNomeLikeIgnoreCasePageable(nome, new PageRequest(page, size)));
+		} catch (Exception e) {
+			return new HttpResponse(e.getMessage());
+		}
+	}
+	
 	@RequestMapping(path = "/{id}", method = RequestMethod.GET)
 	public HttpResponse findOne(@PathVariable Long id) {
 		try {

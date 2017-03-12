@@ -1,5 +1,7 @@
 package br.com.merci.web.http;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -29,15 +31,18 @@ public class HttpProxy {
 	private final String api = "http://localhost:8081/api/";
 
 	public HttpResponse getObject(String uri, Class<?> responseClass) throws HttpResponseException {
-		return exchange(null, api + uri, HttpMethod.GET, responseClass);
+		return exchange(api + uri, HttpMethod.GET, responseClass, null);
 	}
 	
-	public <E> HttpResponse exchange(E data, String uri, HttpMethod method, Class<?> responseClass) throws HttpResponseException {
+	public HttpResponse getObject(String uri, HttpMethod method, Class<?> responseClass, Map<String, Object> params) throws HttpResponseException {
+		return exchange(api + uri, method, responseClass, params);
+	}
+	
+	public <E> HttpResponse exchange(String uri, HttpMethod method, Class<?> responseClass, Map<String, Object> params) throws HttpResponseException {
 
 		try {
-			
 			HttpEntity<E> request = new HttpEntity<>(headers);
-			ResponseEntity<HttpResponse> result = template.exchange(uri, method, request, HttpResponse.class);
+			ResponseEntity<HttpResponse> result = template.exchange(uri, method, request, HttpResponse.class, params);
 			HttpResponse response = result.getBody();
 
 			if (response == null)
@@ -54,7 +59,7 @@ public class HttpProxy {
 		} catch (RestClientException e) {
 			throw new HttpResponseException("Erro na comunicação com o servidor", e.getMessage());
 		} catch (IllegalArgumentException e) {
-			throw new HttpResponseException("Erro ao converter objeto vindo do servidor", e.getMessage());
+			throw new HttpResponseException("Erro na conversão da resposta", e.getMessage());
 		} catch (Exception e) {
 			throw new HttpResponseException("Houve um erro inesperado", e.getMessage());
 		}

@@ -29,6 +29,7 @@ public class MerciWebConfiguration {
 	@Bean
 	public HttpHeaders httpHeaders() {
 	    HttpHeaders headers = new HttpHeaders();
+	    headers.
 	    headers.setContentType(MediaType.APPLICATION_JSON);
 		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
 		return headers;

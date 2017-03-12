@@ -1,0 +1,43 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+    <div th:fragment="lineNumbers">
+    	<input id="path" type="hidden" th:value="${path}" />
+    
+    	<form class="form-inline">
+		  	<div class="form-group">
+		    	<label for="lineNumbers">Exibir:</label>
+           		<select id="lineNumbers" class="form-control" th:onchange="|location = '/${path}/${pageableBean.number}/' + this.value|">
+               		<option th:each="i : ${#numbers.sequence(5, 30, 5)}" 
+               				th:value="${i}" 
+               				th:text="${i}"
+               				th:selected="${pageableBean.size == i}"></option>
+           		</select>
+               	<label>linhas</label>
+		  	</div>
+		</form>
+    </div>
+
+	<div th:fragment="navigation">
+		 <nav aria-label="Page navigation">
+			  <ul class="pagination">
+			    <li th:class="${pageableBean.first} ? disabled : ''">
+			      <a th:href="${pageableBean.first} ? '#' : |/${path}/0/${pageableBean.size}|" aria-label="Previous">
+			        <span aria-hidden="true">&laquo;</span>
+			      </a>
+			    </li>
+			    
+			    <li th:each="i : ${#numbers.sequence(pageableBean.startAt, pageableBean.endAt)}" 
+			    	th:class="${pageableBean.number == (i - 1)} ? active : ''">
+			    	<a th:href="${pageableBean.number == (i - 1)} ? '#' : |/${path}/${i - 1}/${pageableBean.size}|" th:text="${i}"></a>
+			    </li>
+			    
+			    <li th:class="${pageableBean.last} ? disabled : ''">
+			      <a th:href="${pageableBean.last} ? '#' : |/${path}/${pageableBean.totalPages - 1}/${pageableBean.size}|" aria-label="Next">
+			        <span aria-hidden="true">&raquo;</span>
+			      </a>
+			    </li>
+			  </ul>
+		  </nav> 
+	</div>
+
+</html>

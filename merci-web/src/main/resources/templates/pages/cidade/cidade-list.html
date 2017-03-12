@@ -4,7 +4,7 @@
 <head th:replace="fragments/head :: head(title='Home')"></head>    
 <body class="nav-md">
 
- <input id="pageableNumber" type="hidden" th:value="${pageableCidade.number}" />
+ <input id="pageableNumber" type="hidden" th:value="${pageableCidade.impl.number}" />
 
  <div class="container body">
    <div class="main_container">
@@ -63,7 +63,7 @@
                      </thead>
 
                      <tbody>
-                       <tr th:each="cidade : ${pageableCidade.content}">
+                       <tr th:each="cidade : ${pageableCidade.impl.content}">
                           <td th:text="${cidade.nome}"></td>
                         </tr>
                      </tbody>

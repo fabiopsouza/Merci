@@ -2,9 +2,11 @@ package br.com.merci.core.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import br.com.merci.domain.bean.PageImplBean;
 import br.com.merci.domain.model.Cidade;
 import br.com.merci.store.repository.CidadeRepository;
 
@@ -22,8 +24,11 @@ public class CidadeService {
 		return repository.findAll(pageable);
 	}
 	
-	public Page<Cidade> findByNomeLikeIgnoreCasePageable(String nome, Pageable pageable){
-		return repository.findByNomeLikeIgnoreCase("%" + nome + "%", pageable);
+	public PageImplBean<Cidade> findByNomeLikeIgnoreCasePageable(String nome, Pageable pageable){
+		PageImpl<Cidade> page = (PageImpl<Cidade>) repository.findByNomeLikeIgnoreCase("%" + nome + "%", pageable);
+		PageImplBean<Cidade> pageableCidade = new PageImplBean<>(page);
+		
+		return pageableCidade;
 	}
 	
 	public Cidade findOne(Long id){

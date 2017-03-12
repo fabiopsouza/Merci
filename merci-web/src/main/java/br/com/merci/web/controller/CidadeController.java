@@ -3,37 +3,37 @@ package br.com.merci.web.controller;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import br.com.merci.domain.exception.HttpResponseException;
-import br.com.merci.web.proxy.CidadeProxy;
+import br.com.merci.core.service.CidadeService;
+import br.com.merci.domain.bean.PageImplBean;
+import br.com.merci.domain.model.Cidade;
 
 @Controller
 @RequestMapping("/cidade")
-public class CidadeController {
+public class CidadeController extends AbstractController {
 
 	@Autowired
-	private CidadeProxy proxy;
+	private CidadeService service;
 
 	private static final String CIDADE_LIST = "pages/cidade/cidade-list";
 	private static final String CIDADE_ADD = "pages/cidade/cidade-add";
-
+	
 	@RequestMapping(value = {"", "/", "{page}", "{page}/{size}"}, method = RequestMethod.GET)
 	public String list(Model model, @PathVariable Optional<Integer> page, @PathVariable Optional<Integer> size) {
 
-		try {
-			int pageNumber = page.isPresent() ? page.get() : 0;
-			int limitSize = size.isPresent() ? size.get() : 5;
-			
-			model.addAttribute("pageableCidade", proxy.listPageable(pageNumber, limitSize));
-		} catch (HttpResponseException e) {
-			// TODO implement
-		}
-
+		int pageNumber = page.isPresent() ? page.get() : 0;
+		int limitSize = size.isPresent() ? size.get() : 5;
+				
+		PageImplBean<Cidade> pageableCidade = service.findByNomeLikeIgnoreCasePageable("g", new PageRequest(pageNumber, limitSize));
+		
+		model.addAttribute("pageableCidade", pageableCidade);
+		
 		return CIDADE_LIST;
 	}
 

@@ -6,11 +6,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 @RequestMapping("/")
-public class HomeController {
-
+public class HomeController extends AbstractController {
+	
 	@RequestMapping(method = RequestMethod.GET)
 	public String home(){
-		return "pages/home";
+		return BASE_PATH + "home";
 	}
 	
 }

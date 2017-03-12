@@ -6,31 +6,28 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import br.com.merci.domain.exception.HttpResponseException;
-import br.com.merci.web.proxy.FornecedorProxy;
+import br.com.merci.core.service.FornecedorService;
 
 @Controller
 @RequestMapping("/fornecedor")
-public class FornecedorController {
+public class FornecedorController extends AbstractController {
 
+	public FornecedorController() {
+		super("fornecedor");
+	}
+	
 	@Autowired
-	private FornecedorProxy proxy;
+	private FornecedorService service;
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String list(Model model) {
-		
-		try {
-			model.addAttribute("fornecedores", proxy.list());
-		} catch (HttpResponseException e) {
-			// TODO implement
-		}
-		
-		return "pages/fornecedor/fornecedor-list";
+		model.addAttribute("fornecedores", service.findAll());
+		return BASE_PATH + "fornecedor-list";
 	}
-	
+
 	@RequestMapping(path = "/add", method = RequestMethod.GET)
 	public String add(Model model) {
-		return "pages/fornecedor/fornecedor-add";
+		return BASE_PATH + "fornecedor-add";
 	}
 
 }

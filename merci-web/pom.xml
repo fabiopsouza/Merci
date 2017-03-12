@@ -57,10 +57,10 @@
 			<artifactId>merci-domain</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
-
+		
 		<dependency>
-			<groupId>br.com.merci.api</groupId>
-			<artifactId>merci-api</artifactId>
+			<groupId>br.com.merci.core</groupId>
+			<artifactId>merci-core</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 

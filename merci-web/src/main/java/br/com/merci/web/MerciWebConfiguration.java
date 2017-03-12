@@ -4,12 +4,9 @@ import java.util.Arrays;
 import java.util.TimeZone;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration;
-import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.web.client.RestTemplate;
@@ -17,11 +14,7 @@ import org.springframework.web.client.RestTemplate;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @SpringBootApplication
-@EnableAutoConfiguration(exclude = { 
-		DataSourceAutoConfiguration.class, 
-		DataSourceTransactionManagerAutoConfiguration.class, 
-		HibernateJpaAutoConfiguration.class 
-})
+@ComponentScan({ "br.com.merci.web", "br.com.merci.core" })
 public class MerciWebConfiguration {
 
 	public static void main(String[] args) {
@@ -47,4 +40,5 @@ public class MerciWebConfiguration {
 		mapper.setTimeZone(TimeZone.getTimeZone("GMT-3"));
 		return mapper;
 	}
+	
 }

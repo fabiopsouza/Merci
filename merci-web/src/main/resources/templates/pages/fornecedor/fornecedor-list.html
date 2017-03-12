@@ -13,7 +13,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Fornecedor <small>Manutenção de fornecedores</small></h3>
+                <h3>Fornecedor</h3>
               </div>
 
               <div class="title_right">
@@ -33,31 +33,17 @@
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
-                  <div class="x_title">
-                    <h2>Tabela de fornecedores <small>consulte os fornecedores cadastrados</small></h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
-                    </ul>
-                    <div class="clearfix"></div>
-                  </div>
                   <div class="x_content">
 
                     <table class="table">
                       <thead>
                         <tr>
-                          <th>#</th>
                           <th>Nome</th>
-                          <th>Endereço</th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr th:each="fornecedor : ${fornecedores}">
-                          <th scope="row" th:text="${fornecedor.id}"></th>
                           <td th:text="${fornecedor.nome}"></td>
-                          <td th:text="${fornecedor.endereco}"></td>
                         </tr>
                       </tbody>
                     </table>

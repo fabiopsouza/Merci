@@ -5,12 +5,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping("/settings")
-public class ConfiguracoesController {
+@RequestMapping("/usuario")
+public class UsuarioController extends AbstractController {
 
+	public UsuarioController() {
+		super("usuario");
+	}
+	
 	@RequestMapping(method = RequestMethod.GET)
 	public String home(){
-		return "pages/configuracoes/settings";
+		return BASE_PATH + "usuario";
 	}
 	
 }

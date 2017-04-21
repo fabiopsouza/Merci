@@ -46,9 +46,9 @@
 	           	  	<div class="title_right">
 		                <div class="col-md-3 col-sm-3 col-xs-12 form-group pull-right top_search">
 		                  <div class="input-group">
-		                    <input type="text" class="form-control" placeholder="Search for..." />
+		                    <input id="searchInput" type="text" class="form-control" placeholder="Procurar por..." />
 		                    <span class="input-group-btn">
-		                      <button class="btn btn-default" type="button">Go!</button>
+		                      <button class="btn btn-default" type="button">Buscar!</button>
 		                    </span>
 		                  </div>
 		                </div>
@@ -84,6 +84,7 @@
  	<div th:replace="fragments/footer :: content"></div>    
    </div>
  </div>
-    <div th:replace="fragments/scripts :: import"></div>    
+ <div th:replace="fragments/scripts :: import"></div>
+ <script th:src="@{/js/pages/cidade/cidade-list.js}"></script>   
 </body>              
 </html>

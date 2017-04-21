@@ -11,10 +11,9 @@ import br.com.merci.core.service.FornecedorService;
 @Controller
 @RequestMapping("/fornecedor")
 public class FornecedorController extends AbstractController {
-
-	public FornecedorController() {
-		super("fornecedor");
-	}
+	
+	private static final String FORNECEDOR_LIST = "pages/fornecedor/fornecedor-list";
+	private static final String FORNECEDOR_ADD = "pages/fornecedor/fornecedor-add";
 	
 	@Autowired
 	private FornecedorService service;
@@ -22,12 +21,12 @@ public class FornecedorController extends AbstractController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String list(Model model) {
 		model.addAttribute("fornecedores", service.findAll());
-		return BASE_PATH + "fornecedor-list";
+		return FORNECEDOR_LIST;
 	}
 
 	@RequestMapping(path = "/add", method = RequestMethod.GET)
 	public String add(Model model) {
-		return BASE_PATH + "fornecedor-add";
+		return FORNECEDOR_ADD;
 	}
 
 }

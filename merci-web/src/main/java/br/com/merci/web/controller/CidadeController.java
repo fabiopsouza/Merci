@@ -24,13 +24,14 @@ public class CidadeController extends AbstractController {
 	private static final String CIDADE_LIST = "pages/cidade/cidade-list";
 	private static final String CIDADE_ADD = "pages/cidade/cidade-add";
 	
-	@RequestMapping(value = {"", "/", "{page}", "{page}/{size}"}, method = RequestMethod.GET)
-	public String list(Model model, @PathVariable Optional<Integer> page, @PathVariable Optional<Integer> size) {
+	@RequestMapping(value = {"", "/", "{page}", "{page}/{size}", "{page}/{size}/{nome}"}, method = RequestMethod.GET)
+	public String list(Model model, @PathVariable Optional<Integer> page, @PathVariable Optional<Integer> size, @PathVariable Optional<String> name) {
 
 		int pageNumber = page.isPresent() ? page.get() : 0;
 		int limitSize = size.isPresent() ? size.get() : 5;
-				
-		PageImplBean<Cidade> pageableCidade = service.findByNomeLikeIgnoreCasePageable("g", new PageRequest(pageNumber, limitSize));
+		String nome = name.isPresent() ? name.get() : "";
+		
+		PageImplBean<Cidade> pageableCidade = service.findByNomeLikeIgnoreCasePageable(nome, new PageRequest(pageNumber, limitSize));
 		
 		model.addAttribute("pageableCidade", pageableCidade);
 		

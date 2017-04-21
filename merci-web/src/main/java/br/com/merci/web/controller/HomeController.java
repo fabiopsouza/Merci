@@ -8,9 +8,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/")
 public class HomeController extends AbstractController {
 	
+	private static final String HOME = "pages/home";
+	
 	@RequestMapping(method = RequestMethod.GET)
 	public String home(){
-		return BASE_PATH + "home";
+		return HOME;
 	}
 	
 }

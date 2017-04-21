@@ -8,13 +8,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/usuario")
 public class UsuarioController extends AbstractController {
 
-	public UsuarioController() {
-		super("usuario");
-	}
+	private static final String USUARIO_LIST = "pages/usuario/usuario-list";
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String home(){
-		return BASE_PATH + "usuario";
+		return USUARIO_LIST;
 	}
 	
 }
